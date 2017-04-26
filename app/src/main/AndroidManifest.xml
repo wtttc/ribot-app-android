@@ -20,36 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-            android:label="@string/app_name" />
 
-        <activity
-            android:name=".ui.signin.SignInActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name=".ui.WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name=".ui.checkin.CheckInActivity"
-            android:parentActivityName=".ui.main.MainActivity"
-            android:label="@string/title_check_in" />
-
-        <service android:name=".service.AutoCheckInService"/>
-
-        <service android:name=".service.BeaconsSyncService"/>
-
-
-        <receiver
-            android:name=".service.BeaconsSyncService$SyncOnConnectionAvailable"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
 
         <receiver android:name=".service.BootCompletedReceiver">
             <intent-filter>

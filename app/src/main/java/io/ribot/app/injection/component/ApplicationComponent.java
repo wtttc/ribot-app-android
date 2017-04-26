@@ -17,8 +17,6 @@ import io.ribot.app.data.remote.RibotService;
 import io.ribot.app.data.remote.UnauthorisedInterceptor;
 import io.ribot.app.injection.ApplicationContext;
 import io.ribot.app.injection.module.ApplicationModule;
-import io.ribot.app.service.AutoCheckInService;
-import io.ribot.app.service.BeaconsSyncService;
 import io.ribot.app.service.BootCompletedReceiver;
 
 @Singleton
@@ -28,10 +26,6 @@ public interface ApplicationComponent {
     void inject(RibotApplication ribotApplication);
 
     void inject(UnauthorisedInterceptor unauthorisedInterceptor);
-
-    void inject(AutoCheckInService autoCheckInService);
-
-    void inject(BeaconsSyncService beaconsSyncService);
 
     void inject(BootCompletedReceiver bootCompletedReceiver);
 

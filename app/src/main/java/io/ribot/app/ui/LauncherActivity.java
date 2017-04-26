@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import io.ribot.app.data.DataManager;
 import io.ribot.app.ui.base.BaseActivity;
-import io.ribot.app.ui.main.MainActivity;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -18,12 +17,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        Intent intent;
-//        if (mDataManager.getPreferencesHelper().getAccessToken() != null) {
-        intent = MainActivity.getStartIntent(this, false);
-//        } else {
-
-//        }
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

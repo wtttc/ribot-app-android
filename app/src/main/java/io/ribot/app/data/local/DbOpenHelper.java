@@ -22,7 +22,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.beginTransaction();
         try {
-            db.execSQL(Db.BeaconTable.CREATE);
+//            db.execSQL(Db.BeaconTable.CREATE);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
