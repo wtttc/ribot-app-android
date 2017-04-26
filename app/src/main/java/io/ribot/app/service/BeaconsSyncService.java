@@ -11,15 +11,16 @@ import javax.inject.Inject;
 import io.ribot.app.RibotApplication;
 import io.ribot.app.data.DataManager;
 import io.ribot.app.util.AndroidComponentUtil;
+import io.ribot.app.util.LogUtils;
 import io.ribot.app.util.NetworkUtil;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class BeaconsSyncService extends Service {
 
-    @Inject DataManager mDataManager;
+    @Inject
+    DataManager mDataManager;
 
     private Subscription mSubscription;
 
@@ -39,10 +40,10 @@ public class BeaconsSyncService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, final int startId) {
-        Timber.i("Starting sync...");
+        LogUtils.i("Starting sync...");
 
         if (!NetworkUtil.isNetworkConnected(this)) {
-            Timber.i("Sync canceled, connection not available");
+            LogUtils.i("Sync canceled, connection not available");
             AndroidComponentUtil.toggleComponent(this, SyncOnConnectionAvailable.class, true);
             stopSelf(startId);
             return START_NOT_STICKY;
@@ -54,13 +55,13 @@ public class BeaconsSyncService extends Service {
                 .subscribe(new Subscriber<Void>() {
                     @Override
                     public void onCompleted() {
-                        Timber.i("Synced successfully!");
+                        LogUtils.i("Synced successfully!");
                         stopSelf(startId);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.w(e, "Error syncing.");
+                        LogUtils.w("Error syncing.", e);
                         stopSelf(startId);
                     }
 
@@ -89,7 +90,7 @@ public class BeaconsSyncService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (NetworkUtil.isNetworkConnected(context)) {
-                Timber.i("Connection is now available, triggering sync...");
+                LogUtils.i("Connection is now available, triggering sync...");
                 AndroidComponentUtil.toggleComponent(context, this.getClass(), false);
                 context.startService(getStartIntent(context));
             }

@@ -32,7 +32,7 @@ import io.ribot.app.data.model.Profile;
 import io.ribot.app.ui.WelcomeActivity;
 import io.ribot.app.ui.base.BaseActivity;
 import io.ribot.app.util.DialogFactory;
-import timber.log.Timber;
+import io.ribot.app.util.LogUtils;
 
 public class SignInActivity extends BaseActivity implements SignInMvpView {
 
@@ -91,7 +91,7 @@ public class SignInActivity extends BaseActivity implements SignInMvpView {
                     .show();
         } else {
             showNoPlayServicesError();
-            Timber.e("This device doesn't support Play Services");
+            LogUtils.e("This device doesn't support Play Services");
         }
 
         String popUpMessage = getIntent().getStringExtra(EXTRA_POPUP_MESSAGE);

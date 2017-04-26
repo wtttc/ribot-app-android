@@ -10,12 +10,12 @@ import javax.inject.Inject;
 import io.ribot.app.data.DataManager;
 import io.ribot.app.data.model.Ribot;
 import io.ribot.app.ui.base.Presenter;
+import io.ribot.app.util.LogUtils;
 import io.ribot.app.util.NetworkUtil;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class SignInPresenter implements Presenter<SignInMvpView> {
 
@@ -40,7 +40,7 @@ public class SignInPresenter implements Presenter<SignInMvpView> {
     }
 
     public void signInWithGoogle(final Account account) {
-        Timber.i("Starting sign in with account " + account.name);
+        LogUtils.i("Starting sign in with account " + account.name);
         mMvpView.showProgress(true);
         mMvpView.setSignInButtonEnabled(false);
         mSubscription = mDataManager.signIn(account)
@@ -55,9 +55,9 @@ public class SignInPresenter implements Presenter<SignInMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         mMvpView.showProgress(false);
-                        Timber.w("Sign in has called onError" + e);
+                        LogUtils.w("Sign in has called onError" + e);
                         if (e instanceof UserRecoverableAuthException) {
-                            Timber.w("UserRecoverableAuthException has happen");
+                            LogUtils.w("UserRecoverableAuthException has happen");
                             Intent recover = ((UserRecoverableAuthException) e).getIntent();
                             mMvpView.onUserRecoverableAuthException(recover);
                         } else {
@@ -74,7 +74,7 @@ public class SignInPresenter implements Presenter<SignInMvpView> {
 
                     @Override
                     public void onNext(Ribot ribot) {
-                        Timber.i("Sign in successful. Profile name: " + ribot.profile.name.first);
+                        LogUtils.i("Sign in successful. Profile name: " + ribot.profile.name.first);
                         mMvpView.onSignInSuccessful(ribot.profile);
                     }
                 });

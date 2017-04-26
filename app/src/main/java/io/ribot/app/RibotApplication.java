@@ -17,19 +17,19 @@ import io.ribot.app.ui.signin.SignInActivity;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class RibotApplication extends Application {
 
-    @Inject Bus mEventBus;
-    @Inject DataManager mDataManager;
+    @Inject
+    Bus mEventBus;
+    @Inject
+    DataManager mDataManager;
     ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
 
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

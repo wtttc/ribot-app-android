@@ -4,11 +4,11 @@ import javax.inject.Inject;
 
 import io.ribot.app.data.DataManager;
 import io.ribot.app.ui.base.Presenter;
+import io.ribot.app.util.LogUtils;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class MainPresenter implements Presenter<MainMvpView> {
 
@@ -39,13 +39,13 @@ public class MainPresenter implements Presenter<MainMvpView> {
                 .subscribe(new Subscriber<Void>() {
                     @Override
                     public void onCompleted() {
-                        Timber.i("Sign out successful!");
+                        LogUtils.i("Sign out successful!");
                         mMvpView.onSignedOut();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e("Error signing out: " + e);
+                        LogUtils.e("Error signing out: " + e);
                     }
 
                     @Override

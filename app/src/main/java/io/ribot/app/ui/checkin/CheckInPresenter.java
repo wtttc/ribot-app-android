@@ -11,6 +11,7 @@ import io.ribot.app.data.model.CheckIn;
 import io.ribot.app.data.model.CheckInRequest;
 import io.ribot.app.data.model.Venue;
 import io.ribot.app.ui.base.BasePresenter;
+import io.ribot.app.util.LogUtils;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -19,7 +20,6 @@ import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 public class CheckInPresenter extends BasePresenter<CheckInMvpView> {
 
@@ -58,7 +58,7 @@ public class CheckInPresenter extends BasePresenter<CheckInMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e("Error loading venues " + e);
+                        LogUtils.e("Error loading venues " + e);
                         getMvpView().showVenuesProgress(false);
                     }
 
@@ -94,7 +94,7 @@ public class CheckInPresenter extends BasePresenter<CheckInMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e("Error checking in manually " + e);
+                        LogUtils.e("Error checking in manually " + e);
                         showCheckInProgress(false, checkInRequest);
                         getMvpView().showCheckInFailed();
                         // if it's a label (typing) request, we make sure we enable the button again
@@ -105,7 +105,7 @@ public class CheckInPresenter extends BasePresenter<CheckInMvpView> {
 
                     @Override
                     public void onNext(CheckIn checkIn) {
-                        Timber.i("Manual check in successful at " + checkIn.getLocationName());
+                        LogUtils.i("Manual check in successful at " + checkIn.getLocationName());
                         showCheckInProgress(false, checkInRequest);
                         showCheckInSuccessful(checkIn);
                     }

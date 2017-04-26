@@ -24,7 +24,7 @@ import io.ribot.app.R;
 import io.ribot.app.data.model.Profile;
 import io.ribot.app.ui.base.BaseActivity;
 import io.ribot.app.ui.main.MainActivity;
-import timber.log.Timber;
+import io.ribot.app.util.LogUtils;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -32,9 +32,12 @@ public class WelcomeActivity extends BaseActivity {
     private static final String EXTRA_TIME_DISPLAYING =
             "io.ribot.app.ui.WelcomeActivity.EXTRA_TIME_DISPLAYING";
 
-    @BindView(R.id.layout_profile_info) View mProfileInfoLayout;
-    @BindView(R.id.image_profile) CircleImageView mProfileImage;
-    @BindView(R.id.text_greeting) TextView mGreetingText;
+    @BindView(R.id.layout_profile_info)
+    View mProfileInfoLayout;
+    @BindView(R.id.image_profile)
+    CircleImageView mProfileImage;
+    @BindView(R.id.text_greeting)
+    TextView mGreetingText;
 
     private Handler mHandler;
     private long mTimeDisplaying;
@@ -114,7 +117,7 @@ public class WelcomeActivity extends BaseActivity {
                     public boolean onException(Exception e, String model,
                                                Target<GlideDrawable> target,
                                                boolean isFirstResource) {
-                        Timber.e("There was an error loading the profile image");
+                        LogUtils.e("There was an error loading the profile image");
                         return false;
                     }
 

@@ -9,12 +9,12 @@ import javax.inject.Inject;
 import io.ribot.app.data.DataManager;
 import io.ribot.app.data.model.Ribot;
 import io.ribot.app.ui.base.Presenter;
+import io.ribot.app.util.LogUtils;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class TeamPresenter implements Presenter<TeamMvpView> {
 
@@ -45,6 +45,7 @@ public class TeamPresenter implements Presenter<TeamMvpView> {
 
     /**
      * Load the list of Ribots
+     *
      * @param allowMemoryCacheVersion if true a cached version will be returned from memory,
      *                                unless nothing is cached yet. Use false if you want an up
      *                                to date version of the ribots.
@@ -61,7 +62,7 @@ public class TeamPresenter implements Presenter<TeamMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e("There was an error retrieving the ribots " + e);
+                        LogUtils.e("There was an error retrieving the ribots " + e);
                         mMvpView.showRibotProgress(false);
                         mMvpView.showRibotsError();
                     }
