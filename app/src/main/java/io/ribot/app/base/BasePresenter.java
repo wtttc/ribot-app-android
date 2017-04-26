@@ -1,4 +1,4 @@
-package io.ribot.app.ui.base;
+package io.ribot.app.base;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for

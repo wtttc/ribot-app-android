@@ -6,7 +6,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import io.ribot.app.data.DataManager;
-import io.ribot.app.ui.base.BaseActivity;
+import io.ribot.app.base.BaseActivity;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -19,11 +19,6 @@ public class LauncherActivity extends BaseActivity {
         activityComponent().inject(this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
         finish();
     }
 }

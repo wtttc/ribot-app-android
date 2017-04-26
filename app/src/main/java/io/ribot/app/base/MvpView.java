@@ -1,4 +1,4 @@
-package io.ribot.app.ui.base;
+package io.ribot.app.base;
 
 
 /**

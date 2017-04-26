@@ -3,7 +3,7 @@ package io.ribot.app.ui;
 import android.os.Bundle;
 
 import io.ribot.app.R;
-import io.ribot.app.ui.base.BaseActivity;
+import io.ribot.app.base.BaseActivity;
 
 /**
  * Created by tiantong on 2017/4/26.
