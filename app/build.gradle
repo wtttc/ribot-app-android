@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
-apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
@@ -72,12 +71,6 @@ android {
         warning 'InvalidPackage'
     }
 
-}
-
-play {
-    track = 'alpha'
-    serviceAccountEmail = "${ribotAppPlayStoreServiceAccount}"
-    pk12File = file("${ribotAppPlayStorePk12Location}")
 }
 
 dependencies {
