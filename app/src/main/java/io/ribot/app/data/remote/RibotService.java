@@ -9,7 +9,6 @@ import io.ribot.app.BuildConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public interface RibotService {
@@ -37,7 +36,6 @@ public interface RibotService {
                     .baseUrl(RibotService.ENDPOINT)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
             return retrofit.create(RibotService.class);
         }
