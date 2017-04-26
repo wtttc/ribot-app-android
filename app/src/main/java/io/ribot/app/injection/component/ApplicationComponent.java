@@ -13,7 +13,6 @@ import io.ribot.app.RibotApplication;
 import io.ribot.app.data.DataManager;
 import io.ribot.app.data.local.DatabaseHelper;
 import io.ribot.app.data.local.PreferencesHelper;
-import io.ribot.app.data.remote.GoogleAuthHelper;
 import io.ribot.app.data.remote.RibotService;
 import io.ribot.app.data.remote.UnauthorisedInterceptor;
 import io.ribot.app.injection.ApplicationContext;
@@ -27,18 +26,29 @@ import io.ribot.app.service.BootCompletedReceiver;
 public interface ApplicationComponent {
 
     void inject(RibotApplication ribotApplication);
+
     void inject(UnauthorisedInterceptor unauthorisedInterceptor);
+
     void inject(AutoCheckInService autoCheckInService);
+
     void inject(BeaconsSyncService beaconsSyncService);
+
     void inject(BootCompletedReceiver bootCompletedReceiver);
 
-    @ApplicationContext Context context();
+    @ApplicationContext
+    Context context();
+
     Application application();
+
     RibotService ribotService();
+
     PreferencesHelper preferencesHelper();
+
     DatabaseHelper databaseHelper();
+
     DataManager dataManager();
+
     Bus eventBus();
+
     AccountManager accountManager();
-    GoogleAuthHelper googleAuthHelper();
 }

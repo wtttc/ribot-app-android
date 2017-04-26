@@ -16,14 +16,14 @@ import io.ribot.app.service.AutoCheckInService;
 import io.ribot.app.service.BeaconsSyncService;
 import io.ribot.app.ui.base.BaseActivity;
 import io.ribot.app.ui.checkin.CheckInActivity;
-import io.ribot.app.ui.signin.SignInActivity;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
 
     private static final String EXTRA_AUTO_CHECK_IN_DISABLED =
             "io.ribot.app.ui.main.MainActivity.EXTRA_AUTO_CHECK_IN_DISABLED";
 
-    @Inject MainPresenter mMainPresenter;
+    @Inject
+    MainPresenter mMainPresenter;
 
     /**
      * Create an Intent for the main activity.
@@ -71,14 +71,14 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_sign_out:
-                mMainPresenter.signOut();
-                return true;
-            case R.id.action_check_in:
-                startActivity(new Intent(this, CheckInActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        case R.id.action_sign_out:
+            mMainPresenter.signOut();
+            return true;
+        case R.id.action_check_in:
+            startActivity(new Intent(this, CheckInActivity.class));
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -86,6 +86,6 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public void onSignedOut() {
-        startActivity(SignInActivity.getStartIntent(this, true));
+//        startActivity(SignInActivity.getStartIntent(this, true));
     }
 }

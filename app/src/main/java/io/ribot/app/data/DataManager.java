@@ -1,7 +1,5 @@
 package io.ribot.app.data;
 
-import android.accounts.Account;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,10 +13,7 @@ import io.ribot.app.data.model.Encounter;
 import io.ribot.app.data.model.RegisteredBeacon;
 import io.ribot.app.data.model.Ribot;
 import io.ribot.app.data.model.Venue;
-import io.ribot.app.data.remote.GoogleAuthHelper;
 import io.ribot.app.data.remote.RibotService;
-import io.ribot.app.data.remote.RibotService.SignInRequest;
-import io.ribot.app.data.remote.RibotService.SignInResponse;
 import io.ribot.app.util.DateUtil;
 import io.ribot.app.util.EventPosterHelper;
 import rx.Observable;
@@ -33,47 +28,20 @@ public class DataManager {
     private final DatabaseHelper mDatabaseHelper;
     private final PreferencesHelper mPreferencesHelper;
     private final EventPosterHelper mEventPoster;
-    private final GoogleAuthHelper mGoogleAuthHelper;
 
     @Inject
     public DataManager(RibotService ribotService,
                        DatabaseHelper databaseHelper,
                        PreferencesHelper preferencesHelper,
-                       EventPosterHelper eventPosterHelper,
-                       GoogleAuthHelper googleAuthHelper) {
+                       EventPosterHelper eventPosterHelper) {
         mRibotService = ribotService;
         mDatabaseHelper = databaseHelper;
         mPreferencesHelper = preferencesHelper;
         mEventPoster = eventPosterHelper;
-        mGoogleAuthHelper = googleAuthHelper;
     }
 
     public PreferencesHelper getPreferencesHelper() {
         return mPreferencesHelper;
-    }
-
-    /**
-     * Sign in with a Google account.
-     * 1. Retrieve an google auth code for the given account
-     * 2. Sends code and account to API
-     * 3. If success, saves ribot profile and API access token in preferences
-     */
-    public Observable<Ribot> signIn(Account account) {
-        return mGoogleAuthHelper.retrieveAuthTokenAsObservable(account)
-                .concatMap(new Func1<String, Observable<SignInResponse>>() {
-                    @Override
-                    public Observable<SignInResponse> call(String googleAccessToken) {
-                        return mRibotService.signIn(new SignInRequest(googleAccessToken));
-                    }
-                })
-                .map(new Func1<SignInResponse, Ribot>() {
-                    @Override
-                    public Ribot call(SignInResponse signInResponse) {
-                        mPreferencesHelper.putAccessToken(signInResponse.accessToken);
-                        mPreferencesHelper.putSignedInRibot(signInResponse.ribot);
-                        return signInResponse.ribot;
-                    }
-                });
     }
 
     public Observable<Void> signOut() {

@@ -13,7 +13,6 @@ import io.ribot.app.data.DataManager;
 import io.ribot.app.injection.component.ApplicationComponent;
 import io.ribot.app.injection.component.DaggerApplicationComponent;
 import io.ribot.app.injection.module.ApplicationModule;
-import io.ribot.app.ui.signin.SignInActivity;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -65,8 +64,8 @@ public class RibotApplication extends Application {
     }
 
     private void startSignInActivity() {
-        startActivity(SignInActivity.getStartIntent(
-                this, true, getString(R.string.authentication_message)));
+//        startActivity(SignInActivity.getStartIntent(
+//                this, true, getString(R.string.authentication_message)));
     }
 }
 
